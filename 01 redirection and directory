@@ -1,0 +1,153 @@
+### day 01 basic  
+root@ip-172-31-30-193:~/shellscripting# cat <<EOF > list1.txt
+> list 1 line 1
+> list 1 line 2
+>
+> list 1 line 3
+> EOF
+root@ip-172-31-30-193:~/shellscripting# ls
+README.md  list1.txt
+
+
+
+### 
+sed -i 's/list 1/list 2/g' list2.txt
+Explanation:
+sed: The stream editor.
+-i: In-place editing (it will modify the file directly).
+s/list 1/list 2/g: The substitution command. It replaces all occurrences of "list 1" with "list 2". The g at the end makes it global, meaning it will replace all instances of "list 1" in the file, not just the first one.
+list2.txt: The name of the file where the changes will be applied.
+###
+
+root@ip-172-31-30-193:~/shellscripting# sed -i 's/list1/list2/g' list2.txt	<------------ g is for gloabal -i is for in-place-editing
+root@ip-172-31-30-193:~/shellscripting# cat list2.txt
+list 1 line 1
+list 1 line 2
+
+list 1 line 3
+root@ip-172-31-30-193:~/shellscripting# man sed
+root@ip-172-31-30-193:~/shellscripting# sed -i 's/list 1/list 2/' list2.txt
+root@ip-172-31-30-193:~/shellscripting# cat list2.txt
+list 2 line 1
+list 2 line 2
+
+list 2 line 3
+root@ip-172-31-30-193:~/shellscripting#
+
+
+root@ip-172-31-30-193:~/shellscripting# cat -n list1.txt
+     1  list 1 line 1
+     2  list 1 line 2
+     3
+     4  list 1 line 3
+
+
+
+### to squeeze the blank lines 
+list 1 line 1
+
+
+
+
+
+
+list 1 line 2
+
+list 1 line 3
+
+root@ip-172-31-30-193:~/shellscripting# cat -s list1.txt
+list 1 line 1
+
+list 1 line 2
+
+list 1 line 3
+root@ip-172-31-30-193:~/shellscripting#
+
+
+
+### end of the line 
+root@ip-172-31-30-193:~/shellscripting# cat -E list1.txt
+list 1 line 1 $
+list 1 line 2 $
+$
+list 1 line 3$
+root@ip-172-31-30-193:~/shellscripting#
+
+### use man for the other options that can be used with the cat command
+root@ip-172-31-30-193:~/shellscripting# man cat
+
+### cat can create a file 
+root@ip-172-31-30-193:~/shellscripting# cat > test.txt
+line 1
+line 2
+line 3		# press control + d to end the line of the file
+root@ip-172-31-30-193:~/shellscripting#
+
+### appending the next line to the file with double re-direction sign
+root@ip-172-31-30-193:~/shellscripting# cat >> test.txt
+line 4
+line 5
+line 6
+
+root@ip-172-31-30-193:~/shellscripting# cat test.txt
+line 1
+line 2
+line 3
+line 4
+line 5
+line 6
+root@ip-172-31-30-193:~/shellscripting#
+
+
+### redirecting multiple files to a different file
+root@ip-172-31-30-193:~/shellscripting# cat list1.txt list2.txt > out.txt
+root@ip-172-31-30-193:~/shellscripting# ls
+README.md  list1.txt  list2.txt  out.txt  test.txt
+root@ip-172-31-30-193:~/shellscripting# cat out.txt
+list 1 line 1
+list 1 line 2
+
+list 1 line 3
+list 2 line 1
+list 2 line 2
+
+list 2 line 3
+root@ip-172-31-30-193:~/shellscripting#
+
+
+### redirection
+root@ip-172-31-30-193:~/shellscripting# cat list1.txt list2.txt > list2.txt
+cat: list2.txt: input file is output file
+root@ip-172-31-30-193:~/shellscripting# cat list1.txt >> list2.txt
+root@ip-172-31-30-193:~/shellscripting# cat list2.txt
+list 1 line 1
+list 1 line 2
+
+list 1 line 3
+list 1 line 1
+list 1 line 2
+
+list 1 line 3
+root@ip-172-31-30-193:~/shellscripting#
+
+### it is not particular to the cat command
+### you can redirect anything to the text command
+ls -al > out.txt
+
+### creating directory with parent option
+root@ip-172-31-30-193:~/shellscripting# mkdir --parents names/mark
+root@ip-172-31-30-193:~/shellscripting# mkdir image
+
+### creating multiple directories within directory
+root@ip-172-31-30-193:~/shellscripting# mkdir -p names/{john,tom,bob}
+root@ip-172-31-30-193:~/shellscripting# tree names/
+names/
+├── bob
+├── john
+├── mark
+└── tom
+
+5 directories, 0 files
+root@ip-172-31-30-193:~/shellscripting#
+
+
